@@ -21,6 +21,6 @@ public class Repository : IRepository
     {
         using AccountContext context = new();
 
-        return context.Accounts.Any(_users => _users.Email == request.Email || _users.Name == request.Name);
+        return context.Accounts.Any(_users => _users.Email == request.Email || _users.FullName == request.FullName);
     }
 }

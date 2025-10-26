@@ -1,12 +1,11 @@
 ﻿using Account.Entities;
 using Account.UseCases.CreateAccount.Contracts;
-using AutoMapper;
 using FluentValidation.Results;
 using MediatR;
 
 namespace Account.UseCases.CreateAccount;
 
-public class CreateAccountHandler(IMapper mapper, IRepository repository) : IRequestHandler<CreateAccountRequest, CreateAccountResponse>
+public class CreateAccountHandler(IRepository repository) : IRequestHandler<CreateAccountRequest, CreateAccountResponse>
 {
     public async Task<CreateAccountResponse> Handle(CreateAccountRequest request, CancellationToken cancellationToken)
     {
@@ -17,7 +16,7 @@ public class CreateAccountHandler(IMapper mapper, IRepository repository) : IReq
         if (!validationResult.IsValid)
             return new CreateAccountResponse(Message: String.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage)));
 
-        var user = mapper.Map<UserAccount>(request);
+        UserAccount user = request;
 
         if (repository.VerifyIfExists(user))
             return new CreateAccountResponse(Message: "Usuário já existe.");

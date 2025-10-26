@@ -10,7 +10,7 @@ public static class Account
 {
     public static void MapAccountEndPoints(this WebApplication app)
     {
-        app.MapPost("/createaccount", async ([FromServices]IMediator mediator, [FromBody]CreateAccountRequest request) =>
+        app.MapPost("api/createaccount", async ([FromServices]IMediator mediator, [FromBody]CreateAccountRequest request) =>
         {
             var response = await mediator.Send(request);
             return response;

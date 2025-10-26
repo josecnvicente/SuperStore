@@ -15,7 +15,6 @@ public static class Services
         services.AddScoped<IRepository, Repository>();
         services.AddDbContext<AccountContext>();
         services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(UserAccount).Assembly));
-        services.AddAutoMapper(x => x.AddMaps(typeof(UserAccount).Assembly));
         services.AddValidatorsFromAssembly(typeof(UserAccount).Assembly);
     }
 }
